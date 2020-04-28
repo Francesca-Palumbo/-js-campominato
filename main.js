@@ -24,25 +24,42 @@
 //         console.log(numeri_generati_pc);
 // }
 
+//
 var possibilita = 100 - 16;
 
+// creo l'array in cui finiranno i numeri generati dal PC
 var array_numeri_mine = [];
+// length è < 16 perchè saranno 16 i numeri generati dal PC
 while ( array_numeri_mine.length<16 ) {
+    // faccio generare i 16 numeri del PC tramite la funzione Math.floor e la metto nel while perchè finché la  condizione sarà vera, verranno eseguite le istruzioni
     var numero_generati_pc = Math.floor(Math.random() * 100);
+    // uso .include per essere sicura che non generi due numeri uguali tra i 16 generati
     if (!array_numeri_mine.includes(numero_generati_pc)){
+        // se l'if è vero, il numero_generati_pc finisce nell'array dei numeri mina
         array_numeri_mine.push(numero_generati_pc);
     }
 }
 console.log(array_numeri_mine);
 
+// adesso passo alla fase in cui chiedo il numero all'utente
+// lo faccio in un do-while perchè la condizione viene valutata dopo aver eseguito le istruzioni
+// le istruzioni consistono nel fatto che :
 var array_numeri_utente = [];
 do {
+    // innanzitutto chiedo all'utente di inserire il numero
+    // uso il parseInt per assicurarmi che l'utente inserisca effettivamente un numero
     var numero_utente = parseInt(prompt("inserisci un numero"));
+    //  e lo inserisco nell'array dell'utente
         array_numeri_utente.push(numero_utente);
         // console.log(numero_utente);
+    // if il numero inserito dall'utente è un numero appartenente all'array delle mine
     if (array_numeri_mine.includes(numero_utente)) {
+        // vuol dire che l'utente ha inserito un numero contenuto nell'array e quindi ha perso
         console.log("hai colpito una mina con il numero: " + numero_utente) ;
     } else {
+        // se il numero inserito dall'utente non è uno dei numeri dell'array mine, può andare avanti
         console.log("sei fortunato non hai colpito una mina col il numero: " + numero_utente) ;
     }
+    //  la condizione while ha a sua volta due condizioni necessarie per far andare avanti il ciclo
+    //  che il numero inserito dall'utente non debba essere un numero mina E che l'array dell'utente  non arrivi ad 84 ( cioè possibilita =100-16 )
 } while (!array_numeri_mine.includes(numero_utente) && (array_numeri_utente.length<possibilita));
